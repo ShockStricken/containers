@@ -21,7 +21,7 @@ channels:
       enabled: true
       type: web
   - name: plugins
-    platforms: ["linux/amd64", "linux/arm64"]
+    platforms: ["linux/amd64"]
     stable: false
     tests:
       enabled: true
