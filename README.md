@@ -116,6 +116,7 @@ Container | Channel | Image
 [lidarr](https://github.com/ShockStruck/containers/pkgs/container/lidarr) | master | ghcr.io/ShockStruck/lidarr
 [lidarr-develop](https://github.com/ShockStruck/containers/pkgs/container/lidarr-develop) | develop | ghcr.io/ShockStruck/lidarr-develop
 [lidarr-nightly](https://github.com/ShockStruck/containers/pkgs/container/lidarr-nightly) | nightly | ghcr.io/ShockStruck/lidarr-nightly
+[lidarr-plugins](https://github.com/ShockStruck/containers/pkgs/container/lidarr-plugins) | plugins | ghcr.io/ShockStruck/lidarr-plugins
 [par2cmdline-turbo](https://github.com/ShockStruck/containers/pkgs/container/par2cmdline-turbo) | stable | ghcr.io/ShockStruck/par2cmdline-turbo
 [plex](https://github.com/ShockStruck/containers/pkgs/container/plex) | stable | ghcr.io/ShockStruck/plex
 [plex-beta](https://github.com/ShockStruck/containers/pkgs/container/plex-beta) | beta | ghcr.io/ShockStruck/plex-beta
