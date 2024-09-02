@@ -13,14 +13,13 @@ ENV \
     PIP_BREAK_SYSTEM_PACKAGES=1 \
     CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
-ENV SABNZBD__PORT=8080
-
 ENV UMASK="0002" \
     TZ="Etc/UTC"
 
 USER root
 WORKDIR /app
 
+#hadolint ignore=DL3018,DL3013
 RUN \
     apk add --no-cache \
         bash \
@@ -28,30 +27,36 @@ RUN \
         catatonit \
         coreutils \
         curl \
+        ffmpeg \
         jo \
         jq \
+        libxml2 \
+        libxslt \
+        mediainfo \
         nano \
-        p7zip \
         trurl \
         tzdata \
+        unzip \
+        libpq \
     && \
-    apk add --no-cache --virtual=.build-deps \
+    apk add --no-cache --virtual .build-deps \
         build-base \
         cargo \
         libffi-dev \
-        musl-dev \
-        openssl-dev \
+        libpq-dev \
+        libxml2-dev \
+        libxslt-dev \
     && \
-    mkdir -p /app \
+    curl -fsSL -o /tmp/app.zip "https://github.com/morpheus65535/bazarr/releases/download/v${VERSION}/bazarr.zip" \
+    && unzip -q /tmp/app.zip -d /app/bin \
     && \
-    curl -fsSL "https://github.com/sabnzbd/sabnzbd/releases/download/${VERSION}/SABnzbd-${VERSION}-src.tar.gz" \
-        | tar xzf - -C /app --strip-components=1 \
+    rm -rf /app/bin/bin \
     && \
-    pip install uv \
-    && \
-    uv pip install --system --requirement /app/requirements.txt \
-    && \
-    chown -R root:root /app \
+    printf "UpdateMethod=docker\nBranch=master\nPackageVersion=%s\nPackageAuthor=[onedr0p](https://github.com/onedr0p)\n" "${VERSION}" > /app/package_info \
+    && pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+        --requirement /app/bin/requirements.txt \
+        --requirement /app/bin/postgres-requirements.txt \
+    && chown -R root:root /app \
     && chmod -R 755 /app \
     && apk del --purge .build-deps \
     && rm -rf \
@@ -59,12 +64,7 @@ RUN \
         /root/.cargo \
         /tmp/*
 
-COPY ./apps/sabnzbd/sabnzbd.ini /app/sabnzbd.ini
-COPY ./apps/sabnzbd/entrypoint.sh /entrypoint.sh
-COPY --from=ghcr.io/shockstruck/par2cmdline-turbo:1.1.1 /usr/local/bin/par2 /usr/local/bin/par2
-RUN ln -s /usr/local/bin/par2 /usr/local/bin/par2create \
-    && ln -s /usr/local/bin/par2 /usr/local/bin/par2repair \
-    && ln -s /usr/local/bin/par2 /usr/local/bin/par2verify
+COPY ./apps/bazarr/entrypoint.sh /entrypoint.sh
 COPY --from=ghcr.io/linuxserver/unrar:7.0.9 /usr/bin/unrar-alpine /usr/bin/unrar
 
 USER nobody:nogroup
@@ -74,4 +74,4 @@ VOLUME ["/config"]
 ENTRYPOINT ["/usr/bin/catatonit", "--"]
 CMD ["/entrypoint.sh"]
 
-LABEL org.opencontainers.image.source="https://github.com/sabnzbd/sabnzbd"
+LABEL org.opencontainers.image.source="https://github.com/morpheus65535/bazarr"
