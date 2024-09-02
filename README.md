@@ -110,6 +110,7 @@ Container | Channel | Image
 --- | --- | ---
 [actions-runner](https://github.com/ShockStruck/containers/pkgs/container/actions-runner) | stable | ghcr.io/ShockStruck/actions-runner
 [autoscan](https://github.com/ShockStruck/containers/pkgs/container/autoscan) | stable | ghcr.io/ShockStruck/autoscan
+[bazarr](https://github.com/ShockStruck/containers/pkgs/container/bazarr) | stable | ghcr.io/ShockStruck/bazarr
 [cdpgvector](https://github.com/ShockStruck/containers/pkgs/container/cdpgvector) | stable | ghcr.io/ShockStruck/cdpgvector
 [home-assistant](https://github.com/ShockStruck/containers/pkgs/container/home-assistant) | stable | ghcr.io/ShockStruck/home-assistant
 [jbops](https://github.com/ShockStruck/containers/pkgs/container/jbops) | stable | ghcr.io/ShockStruck/jbops
