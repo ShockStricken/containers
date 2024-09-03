@@ -130,6 +130,8 @@ Container | Channel | Image
 [radarr](https://github.com/ShockStruck/containers/pkgs/container/radarr) | master | ghcr.io/ShockStruck/radarr
 [radarr-develop](https://github.com/ShockStruck/containers/pkgs/container/radarr-develop) | develop | ghcr.io/ShockStruck/radarr-develop
 [radarr-nightly](https://github.com/ShockStruck/containers/pkgs/container/radarr-nightly) | nightly | ghcr.io/ShockStruck/radarr-nightly
+[readarr-develop](https://github.com/ShockStruck/containers/pkgs/container/readarr-develop) | develop | ghcr.io/ShockStruck/readarr-develop
+[readarr-nightly](https://github.com/ShockStruck/containers/pkgs/container/readarr-nightly) | nightly | ghcr.io/ShockStruck/readarr-nightly
 [sabnzbd](https://github.com/ShockStruck/containers/pkgs/container/sabnzbd) | stable | ghcr.io/ShockStruck/sabnzbd
 [sonarr](https://github.com/ShockStruck/containers/pkgs/container/sonarr) | main | ghcr.io/ShockStruck/sonarr
 [sonarr-develop](https://github.com/ShockStruck/containers/pkgs/container/sonarr-develop) | develop | ghcr.io/ShockStruck/sonarr-develop
