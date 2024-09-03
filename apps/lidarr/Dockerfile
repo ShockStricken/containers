@@ -22,13 +22,16 @@ RUN \
         ca-certificates \
         catatonit \
         chromaprint \
+        coreutils \
         curl \
         ffmpeg \
         icu-libs \
+        jo \
         jq \
         libintl \
         nano \
         sqlite-libs \
+        trurl \
         tzdata \
     && \
     case "${TARGETPLATFORM}" in \
