@@ -15,7 +15,7 @@ ENV UMASK="0002" \
 
 
 USER root
-WORKDIR /app
+WORKDIR /tmp
 
 # hadolint ignore=DL3008,DL3015,SC2039,SC2086
 RUN \
