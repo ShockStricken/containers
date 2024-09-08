@@ -53,10 +53,10 @@ RUN \
         /tmp/opt/emby-server/lib/* \
         /tmp/opt/emby-server/bin/ff* \
         /tmp/opt/emby-server/etc \
-        /tmp/opt/emby-server/extra/lib/*
+        /tmp/opt/emby-server/extra/lib/* \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
-    && apt-get clean \
+    && apt-get clean
 
 
 
