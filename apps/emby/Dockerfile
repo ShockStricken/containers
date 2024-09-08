@@ -4,24 +4,43 @@ ARG TARGETPLATFORM
 ARG VERSION
 ARG CHANNEL
 
+ENV DEBCONF_NONINTERACTIVE_SEEN="true" \
+    DEBIAN_FRONTEND="noninteractive" \
+    APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="DontWarn"
+
+ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
+
+ENV UMASK="0002" \
+    TZ="Etc/UTC"
+
+USER root
 WORKDIR /tmp
 
 # hadolint ignore=DL3008,DL3015,SC2039,SC2086
 RUN \
+    apt-get update \
+    && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+        bash \
+        ca-certificates \
+        catatonit \
+        coreutils \
+        curl \
+        jo \
+        jq \
+        nano \
+        tzdata \
+        uuid-runtime \
+        xmlstarlet \
+    && \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
-            export ARCH='x86_64'; \
+            export ARCH='amd64'; \
         ;; \
         'linux/arm64') \
-            export ARCH='aarch64'; \
+            export ARCH='arm64'; \
         ;; \
     esac \
-    && \
-    apt-get update -qq \
-    && \
-    apt-get install -qqy cpio rpm2cpio \
-    && \
-    mkdir -p /app/emby \
     && \
     curl -fsSL -o emby.rpm \
         "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-rpm_${VERSION}_${ARCH}.rpm" \
@@ -35,47 +54,31 @@ RUN \
         /tmp/opt/emby-server/bin/ff* \
         /tmp/opt/emby-server/etc \
         /tmp/opt/emby-server/extra/lib/*
-
-FROM docker.io/library/ubuntu:24.04
-
-ARG TARGETPLATFORM
-ARG VERSION
-ARG CHANNEL
-
-ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
-
-USER root
-
-# hadolint ignore=DL3008,DL3015,SC2039,SC2086
-RUN \
-    case "${TARGETPLATFORM}" in \
-        'linux/amd64') \
-            export EXTRA_INSTALL_ARG='mesa-va-drivers'; \
-        ;; \
-        'linux/arm64') \
-            curl -s "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6587ffd6536b8826e88a62547876ae518cbcf2f2" | apt-key add - \
-            && echo "deb http://ppa.launchpad.net/ubuntu-raspi2/ppa-nightly/ubuntu focal main">> /etc/apt/sources.list.d/raspbins.list \
-            && \
-            export EXTRA_INSTALL_ARG='libomxil-bellagio0 libomxil-bellagio-bin libraspberrypi0'; \
-            unset NVIDIA_DRIVER_CAPABILITIES; \
-        ;; \
-    esac \
-    && \
-    apt-get update -qq && \
-    apt-get install -qqy ${EXTRA_INSTALL_ARG} \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
-    && \
-    rm -rf \
-        /tmp/* \
-        /var/lib/apt/lists/* \
-        /var/tmp/ \
-    && chown -R root:root /app \
-    && chmod -R 755 /app \
-    && printf "umask %d\n" "${UMASK}" >> /etc/bash.bashrc
 
-USER kah
-COPY --from=builder /app/emby /app/emby
+
+
+
+        && \
+        dpkg -i --force-confold /tmp/emby.deb \
+        && chmod -R 755 "${emby_MEDIA_SERVER_HOME}" \
+        && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+        && apt-get autoremove -y \
+        && apt-get clean \
+        && \
+        rm -rf \
+            /etc/default/embymediaserver \
+            /tmp/* \
+            /var/lib/apt/lists/* \
+            /var/tmp/
+
 COPY ./apps/emby/entrypoint.sh /entrypoint.sh
+
+USER nobody:nogroup
+WORKDIR /config
+VOLUME ["/config"]
+
+ENTRYPOINT [ "/usr/bin/catatonit", "--" ]
 CMD ["/entrypoint.sh"]
