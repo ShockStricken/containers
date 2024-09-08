@@ -13,8 +13,9 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 ENV UMASK="0002" \
     TZ="Etc/UTC"
 
+
 USER root
-WORKDIR /tmp
+WORKDIR /app
 
 # hadolint ignore=DL3008,DL3015,SC2039,SC2086
 RUN \
@@ -42,22 +43,18 @@ RUN \
         ;; \
     esac \
     && \
-    curl -fsSL -o emby.rpm \
-        "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-rpm_${VERSION}_${ARCH}.rpm" \
+    curl -fsSL -o /tmp/emby.deb \
+        "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" \
     && \
-    rpm2cpio emby.rpm | cpio -i --make-directories \
-    && \
-    mv -t \
-        /app/emby \
-        /tmp/opt/emby-server/system/* \
-        /tmp/opt/emby-server/lib/* \
-        /tmp/opt/emby-server/bin/ff* \
-        /tmp/opt/emby-server/etc \
-        /tmp/opt/emby-server/extra/lib/* \
+    dpkg -i --force-confold /tmp/emby.deb \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
-    && apt-get clean
-
+    && apt-get clean \
+    && \
+    rm -rf \
+        /tmp/* \
+        /var/lib/apt/lists/* \
+        /var/tmp/
 
 COPY ./apps/emby/entrypoint.sh /entrypoint.sh
 
