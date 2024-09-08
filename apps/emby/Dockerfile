@@ -59,21 +59,6 @@ RUN \
     && apt-get clean
 
 
-
-
-        && \
-        dpkg -i --force-confold /tmp/emby.deb \
-        && chmod -R 755 "${emby_MEDIA_SERVER_HOME}" \
-        && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-        && apt-get autoremove -y \
-        && apt-get clean \
-        && \
-        rm -rf \
-            /etc/default/embymediaserver \
-            /tmp/* \
-            /var/lib/apt/lists/* \
-            /var/tmp/
-
 COPY ./apps/emby/entrypoint.sh /entrypoint.sh
 
 USER nobody:nogroup
