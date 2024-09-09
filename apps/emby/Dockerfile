@@ -19,7 +19,7 @@ WORKDIR /app
 RUN \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
-            export ARCH='amd64'; && \
+            export ARCH='amd64'; \
             apt-get update \
             && \
             apt-get install -y --no-install-recommends --no-install-suggests \
@@ -36,7 +36,7 @@ RUN \
                 xmlstarlet \
         ;; \
         'linux/arm64') \
-            export ARCH='arm64'; && \
+            export ARCH='arm64'; \
             apt-get update \
             && \
             apt-get install -y --no-install-recommends --no-install-suggests \
