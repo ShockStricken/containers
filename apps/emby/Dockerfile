@@ -19,7 +19,7 @@ WORKDIR /tmp
 RUN \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
-            export ARCH='amd64'; \
+            export ARCH='x86_64'; \
             apt-get update \
             && \
             apt-get install -y --no-install-recommends --no-install-suggests \
@@ -39,7 +39,7 @@ RUN \
                 mesa-va-drivers \
         ;; \
         'linux/arm64') \
-            export ARCH='arm64'; \
+            export ARCH='aarch64'; \
             unset NVIDIA_DRIVER_CAPABILITIES; \
             apt-get update \
             && \
