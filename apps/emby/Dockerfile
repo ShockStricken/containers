@@ -17,20 +17,6 @@ WORKDIR /app
 
 # hadolint ignore=DL3008,DL3015,SC2039,SC2086
 RUN \
-    apt-get update \
-    && \
-    apt-get install -y --no-install-recommends --no-install-suggests \
-        bash \
-        ca-certificates \
-        catatonit \
-        coreutils \
-        curl \
-        jo \
-        jq \
-        nano \
-        tzdata \
-        uuid-runtime \
-        xmlstarlet && \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
             export ARCH='amd64'; && \
