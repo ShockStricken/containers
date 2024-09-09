@@ -13,7 +13,7 @@ ENV UMASK="0002" \
     TZ="Etc/UTC"
 
 USER root
-WORKDIR /app
+WORKDIR /tmp
 
 # hadolint ignore=DL3008,DL3015,SC2039,SC2086
 RUN \
@@ -65,7 +65,8 @@ RUN \
     dpkg-deb -xv /tmp/emby.deb /tmp/emby/ && \
     mv -t \
       /app/emby/ \
-      /tmp/emby/opt/emby-server/* && \
+      /tmp/opt/emby/emby-server/* && \
+
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     apt-get autoremove -y && \
