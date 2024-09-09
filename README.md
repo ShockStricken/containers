@@ -112,6 +112,7 @@ Container | Channel | Image
 [autoscan](https://github.com/ShockStruck/containers/pkgs/container/autoscan) | stable | ghcr.io/ShockStruck/autoscan
 [bazarr](https://github.com/ShockStruck/containers/pkgs/container/bazarr) | stable | ghcr.io/ShockStruck/bazarr
 [cdpgvector](https://github.com/ShockStruck/containers/pkgs/container/cdpgvector) | stable | ghcr.io/ShockStruck/cdpgvector
+[emby](https://github.com/ShockStruck/containers/pkgs/container/emby) | stable | ghcr.io/ShockStruck/emby
 [home-assistant](https://github.com/ShockStruck/containers/pkgs/container/home-assistant) | stable | ghcr.io/ShockStruck/home-assistant
 [jbops](https://github.com/ShockStruck/containers/pkgs/container/jbops) | stable | ghcr.io/ShockStruck/jbops
 [lidarr](https://github.com/ShockStruck/containers/pkgs/container/lidarr) | master | ghcr.io/ShockStruck/lidarr
