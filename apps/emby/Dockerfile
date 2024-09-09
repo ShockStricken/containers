@@ -34,9 +34,13 @@ RUN \
                 tzdata \
                 uuid-runtime \
                 xmlstarlet \
+                cpio \
+                rpm2cpio \
+                mesa-va-drivers \
         ;; \
         'linux/arm64') \
             export ARCH='arm64'; \
+            unset NVIDIA_DRIVER_CAPABILITIES; \
             apt-get update \
             && \
             apt-get install -y --no-install-recommends --no-install-suggests \
@@ -51,18 +55,19 @@ RUN \
                 tzdata \
                 uuid-runtime \
                 xmlstarlet \
+                cpio \
+                rpm2cpio \
                 libomxil-bellagio0 \
                 libomxil-bellagio-bin \
                 libraspberrypi0 \
         ;; \
     esac && \
-    curl -fsSL -o /tmp/emby.deb \
-        "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" && \
+    curl -fsSL -o /tmp/emby.rpm \
+        "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-rpm_${VERSION}_${ARCH}.rpm" && \
     echo "**** install emby ****" && \
     mkdir -p \
-      /app/emby \
-      /tmp/emby && \
-    dpkg -i --force-confold /tmp/emby/ && \
+      /app/emby && \
+    rpm2cpio emby.rpm | cpio -i --make-directories && \
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     apt-get autoremove -y && \
@@ -71,6 +76,9 @@ RUN \
         /tmp/* \
         /var/lib/apt/lists/* \
         /var/tmp/*
+    && chown -R root:root /app \
+    && chmod -R 755 /app \
+    && printf "umask %d" "${UMASK}" >> /etc/bash.bashrc
 
 COPY ./apps/emby/entrypoint.sh /entrypoint.sh
 
