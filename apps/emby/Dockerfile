@@ -1,4 +1,4 @@
-FROM FROM docker.io/library/ubuntu:24.04 as builder
+FROM docker.io/library/ubuntu:24.04 as builder
 
 ARG TARGETPLATFORM
 ARG VERSION
