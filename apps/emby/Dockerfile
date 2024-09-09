@@ -13,7 +13,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 ENV UMASK="0002" \
     TZ="Etc/UTC"
 
-
 USER root
 WORKDIR /app
 
@@ -37,11 +36,6 @@ RUN \
         libomxil-bellagio-bin \
         libraspberrypi0 \
     && \
-    echo "**** install emby ****" && \
-    mkdir -p \
-      /app/emby \
-      /tmp/emby \
-    && \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
             export ARCH='amd64'; \
@@ -54,6 +48,10 @@ RUN \
     curl -fsSL -o /tmp/emby.deb \
         "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" \
     && \
+    echo "**** install emby ****" && \
+    mkdir -p \
+      /app/emby \
+      /tmp/emby && \
     dpkg-deb -xv /tmp/emby.deb /tmp/emby/ && \
     mv -t \
       /app/emby/ \
