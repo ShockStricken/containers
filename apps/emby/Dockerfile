@@ -13,7 +13,7 @@ ENV UMASK="0002" \
     TZ="Etc/UTC"
 
 USER root
-WORKDIR /tmp
+WORKDIR /app
 
 # hadolint ignore=DL3008,DL3015,SC2039,SC2086
 RUN \
@@ -59,14 +59,7 @@ RUN \
     curl -fsSL -o /tmp/emby.deb \
         "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" && \
     echo "**** install emby ****" && \
-    mkdir -p \
-      /app/emby \
-      /tmp/emby && \
-    dpkg-deb -xv /tmp/emby.deb /tmp/emby/ && \
-    mv -t \
-      /app/emby/ \
-      /tmp/opt/emby/emby-server/* && \
-
+    dpkg -i --force-confold /tmp/emby/ && \
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     apt-get autoremove -y && \
