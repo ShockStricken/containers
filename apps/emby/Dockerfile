@@ -33,10 +33,41 @@ RUN \
         xmlstarlet && \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
-            export ARCH='amd64'; \
+            export ARCH='amd64'; && \
+            apt-get update \
+            && \
+            apt-get install -y --no-install-recommends --no-install-suggests \
+                bash \
+                ca-certificates \
+                catatonit \
+                coreutils \
+                curl \
+                jo \
+                jq \
+                nano \
+                tzdata \
+                uuid-runtime \
+                xmlstarlet \
         ;; \
         'linux/arm64') \
-            export ARCH='arm64'; \
+            export ARCH='arm64'; && \
+            apt-get update \
+            && \
+            apt-get install -y --no-install-recommends --no-install-suggests \
+                bash \
+                ca-certificates \
+                catatonit \
+                coreutils \
+                curl \
+                jo \
+                jq \
+                nano \
+                tzdata \
+                uuid-runtime \
+                xmlstarlet \
+                libomxil-bellagio0 \
+                libomxil-bellagio-bin \
+                libraspberrypi0 \
         ;; \
     esac && \
     curl -fsSL -o /tmp/emby.deb \
