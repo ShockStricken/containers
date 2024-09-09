@@ -12,7 +12,7 @@ export SSL_CERT_FILE="/app/emby/etc/ssl/certs/ca-certificates.crt"
 
 #shellcheck disable=SC2086
 exec \
-	/app/emby/bin/EmbyServer \
+	/app/emby/bin/embyserver \
 		-programdata /config \
 		-ffdetect /app/emby/bin/ffdetect \
 		-ffmpeg /app/emby/bin/ffmpeg \
