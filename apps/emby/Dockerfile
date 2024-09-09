@@ -36,6 +36,7 @@ RUN \
         libomxil-bellagio0 \
         libomxil-bellagio-bin \
         libraspberrypi0 \
+    && \
     echo "**** install emby ****" && \
     mkdir -p \
       /app/emby \
