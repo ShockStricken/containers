@@ -34,8 +34,7 @@ RUN \
         xmlstarlet \
         libomxil-bellagio0 \
         libomxil-bellagio-bin \
-        libraspberrypi0 \
-    && \
+        libraspberrypi0 && \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
             export ARCH='amd64'; \
@@ -43,11 +42,9 @@ RUN \
         'linux/arm64') \
             export ARCH='arm64'; \
         ;; \
-    esac \
-    && \
+    esac && \
     curl -fsSL -o /tmp/emby.deb \
-        "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" \
-    && \
+        "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" && \
     echo "**** install emby ****" && \
     mkdir -p \
       /app/emby \
@@ -57,10 +54,9 @@ RUN \
       /app/emby/ \
       /tmp/emby/opt/emby-server/* && \
     echo "**** cleanup ****" && \
-    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-    && apt-get autoremove -y \
-    && apt-get clean \
-    && \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
+    apt-get autoremove -y && \
+    apt-get clean && \
     rm -rf \
         /tmp/* \
         /var/lib/apt/lists/* \
