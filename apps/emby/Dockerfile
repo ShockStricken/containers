@@ -64,7 +64,6 @@ RUN \
       /tmp/emby && \
     curl -fsSL -o /tmp/emby.deb \
         "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${ARCH}.deb" && \
-
     dpkg-deb -xv /tmp/emby.deb /tmp/emby/ && \
     mv -t \
        /app/emby/ \
