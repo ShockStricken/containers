@@ -31,7 +31,6 @@ RUN \
         tzdata \
         uuid-runtime \
         xmlstarlet \
-        gnupg2 \
     && \
     case "${TARGETPLATFORM}" in \
         'linux/amd64') \
@@ -61,7 +60,6 @@ RUN \
         ${EXTRA_INSTALL_ARG} \
     && \
     echo "**** cleanup ****" && \
-    apt-get remove -y gnupg2 && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     apt-get autoremove -y && \
     apt-get clean && \
