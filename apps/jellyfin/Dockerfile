@@ -57,7 +57,7 @@ RUN \
     apt-get -qq install -y \
         jellyfin-server="${VERSION}*" \
         jellyfin-web \
-        jellyfin-ffmpeg5 \
+        jellyfin-ffmpeg7 \
         ${EXTRA_INSTALL_ARG} \
     && \
     echo "**** cleanup ****" && \
