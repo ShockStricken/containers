@@ -115,6 +115,7 @@ Container | Channel | Image
 [emby](https://github.com/ShockStruck/containers/pkgs/container/emby) | stable | ghcr.io/ShockStruck/emby
 [home-assistant](https://github.com/ShockStruck/containers/pkgs/container/home-assistant) | stable | ghcr.io/ShockStruck/home-assistant
 [jbops](https://github.com/ShockStruck/containers/pkgs/container/jbops) | stable | ghcr.io/ShockStruck/jbops
+[jellyfin](https://github.com/ShockStruck/containers/pkgs/container/jellyfin) | stable | ghcr.io/ShockStruck/jellyfin
 [lidarr](https://github.com/ShockStruck/containers/pkgs/container/lidarr) | master | ghcr.io/ShockStruck/lidarr
 [lidarr-develop](https://github.com/ShockStruck/containers/pkgs/container/lidarr-develop) | develop | ghcr.io/ShockStruck/lidarr-develop
 [lidarr-nightly](https://github.com/ShockStruck/containers/pkgs/container/lidarr-nightly) | nightly | ghcr.io/ShockStruck/lidarr-nightly
