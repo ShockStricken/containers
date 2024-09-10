@@ -97,3 +97,6 @@ VOLUME ["/config"]
 
 ENTRYPOINT [ "/usr/bin/catatonit", "--" ]
 CMD ["/entrypoint.sh"]
+
+
+LABEL org.opencontainers.image.source="https://github.com/MediaBrowser/Emby"
