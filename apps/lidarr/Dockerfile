@@ -51,6 +51,7 @@ RUN \
         python3-dev \
         libc-dev \
         py3-pip \
+        nodejs \
         npm \
     && \
     echo "*** install freyr client ***" && \
