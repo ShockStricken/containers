@@ -88,9 +88,7 @@ RUN \
     printf "UpdateMethod=docker\nBranch=%s\nPackageVersion=%s\nPackageAuthor=[ShockStruck](https://github.com/shockstruck)\n" "${LIDARR__UPDATE__BRANCH}" "${VERSION}" > /app/package_info \
     && chown -R root:root /app \
     && chmod -R 755 /app \
-    apk del \
-      npm \
-      git && \
+    && apk del npm \
     && rm -rf /tmp/*
 
 COPY ./apps/lidarr/entrypoint.sh /entrypoint.sh
