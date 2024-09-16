@@ -28,6 +28,7 @@ RUN \
         icu-libs \
         jo \
         jq \
+        xq \
         libintl \
         nano \
         sqlite-libs \
