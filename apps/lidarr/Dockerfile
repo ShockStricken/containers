@@ -43,6 +43,7 @@ RUN \
         musl-locales \
         musl-locales-lang \
         flac \
+        git \
         gcc \
         imagemagick \
         opus-tools \
