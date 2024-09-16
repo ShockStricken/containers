@@ -1,5 +1,5 @@
 ARG VERSION
-FROM docker.io/library/golang:1.22-alpine as volsync
+FROM docker.io/library/golang:1.23-alpine as volsync
 ARG VERSION
 ARG TARGETOS
 ARG TARGETARCH
@@ -35,8 +35,8 @@ RUN \
         && chmod a+rx /mover-restic/*.sh \
     && rm -rf /tmp/*
 
-COPY --from=docker.io/rclone/rclone:1.67.0 /usr/local/bin/rclone /usr/local/bin/rclone
-COPY --from=docker.io/restic/restic:0.17.0 /usr/bin/restic /usr/local/bin/restic
+COPY --from=docker.io/rclone/rclone:1.68.0 /usr/local/bin/rclone /usr/local/bin/rclone
+COPY --from=docker.io/restic/restic:0.17.1 /usr/bin/restic /usr/local/bin/restic
 COPY --from=volsync /go/bin/volsync /manager
 
 ENTRYPOINT ["/bin/bash"]
