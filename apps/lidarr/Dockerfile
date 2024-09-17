@@ -1,5 +1,5 @@
 ARG VERSION
-FROM docker.io/library/python:3.12.6-alpine
+FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 ARG TARGETPLATFORM
 ARG VERSION
