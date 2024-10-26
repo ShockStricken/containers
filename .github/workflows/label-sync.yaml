@@ -16,7 +16,7 @@ on:
 jobs:
   label-sync:
     name: Label Sync
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, self-hosted]
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@v1
