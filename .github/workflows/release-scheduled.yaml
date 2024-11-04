@@ -25,12 +25,12 @@ on:
 jobs:
   simple-checks:
     name: Simple Checks
-    uses: shockstruck/containers/.github/workflows/simple-checks.yaml@main
+    uses: shockstricken/containers/.github/workflows/simple-checks.yaml@main
 
   build-images:
     name: Build Images
     needs: simple-checks
-    uses: shockstruck/containers/.github/workflows/build-images.yaml@main
+    uses: shockstricken/containers/.github/workflows/build-images.yaml@main
     secrets: inherit
     permissions:
       contents: read
